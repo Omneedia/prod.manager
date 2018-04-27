@@ -1,0 +1,21 @@
+server {
+
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	root var/sites/omneedia/root;
+	index index.html index.htm;
+
+	# Make site accessible from http://localhost/
+	server_name localhost;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	error_page 404 /404.html;
+
+	location = /404.html {
+		root   var/sites/omneedia/errors/;
+	}
+}
